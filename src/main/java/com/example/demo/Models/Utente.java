@@ -20,14 +20,23 @@ public class Utente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id_utente;
 
+    @Column(nullable = false)
+    private String nome;
+
+    @Column(nullable = false)
+    private String cognome;
+
     @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "creatore" , cascade = CascadeType.ALL , fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "organizzatore" , cascade = CascadeType.ALL , fetch = FetchType.LAZY)
     private List<Evento> eventiCreati;
+
+    @OneToMany(mappedBy = "utente" , cascade = CascadeType.ALL , fetch = FetchType.LAZY)
+    private List<Prenotazione> prenotazioni;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
